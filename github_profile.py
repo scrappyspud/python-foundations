@@ -32,10 +32,10 @@ if __name__ == "__main__":
         print(f"Year when account was created: {year_of_creation}")
         repos = get_repos(user_data['repos_url'])
         repos = sorted(repos, key=lambda repo: repo["stargazers_count"], reverse=True)
-        for rank, repo in enumerate(repos, start=1):
+        for rank, repo in enumerate(repos[0:3], start=1):
             print(f"{rank}. {repo['name']} - Stars: {repo['stargazers_count']}")
 
-    except (UserDoesNotExistError) as e:
+    except UserDoesNotExistError as e:
         print(e)
     except requests.exceptions.Timeout:
         print("Request timed out.")
