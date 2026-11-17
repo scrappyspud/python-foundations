@@ -1,7 +1,9 @@
 import requests
 
+
 class UserDoesNotExistError(Exception):
     pass
+
 
 def get_github_user(username):
     response = requests.get(f"https://api.github.com/users/{username}", timeout=10)
@@ -10,12 +12,12 @@ def get_github_user(username):
     response.raise_for_status()
     return response.json()
 
+
 def get_repos(link):
     response = requests.get(link, timeout=10)
     response.raise_for_status()
     return response.json()
 
-    
 
 if __name__ == "__main__":
     user_name = input("Enter a username: ")
@@ -30,7 +32,7 @@ if __name__ == "__main__":
         print(f"Number of Public Repositories: {public_repos_count}")
         print(f"Number of followers: {followers_count}")
         print(f"Year when account was created: {year_of_creation}")
-        repos = get_repos(user_data['repos_url'])
+        repos = get_repos(user_data["repos_url"])
         repos = sorted(repos, key=lambda repo: repo["stargazers_count"], reverse=True)
         for rank, repo in enumerate(repos[0:3], start=1):
             print(f"{rank}. {repo['name']} - Stars: {repo['stargazers_count']}")

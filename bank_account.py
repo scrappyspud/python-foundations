@@ -1,6 +1,7 @@
 class InsufficientFundsError(Exception):
     pass
 
+
 class BankAccount:
     def __init__(self, owner, balance=0):
         self.owner = owner
@@ -17,7 +18,7 @@ class BankAccount:
         elif self.balance < amount:
             raise InsufficientFundsError("Insufficient funds in account.")
         self.balance -= amount
-        
+
     def __str__(self):
         return f"{self.owner}: ${self.balance}"
 
@@ -36,4 +37,4 @@ if __name__ == "__main__":
         gold_bank.withdraw(amount_to_withdraw)
         print(gold_bank)
     except (ValueError, InsufficientFundsError) as e:
-        print(e)       
+        print(e)
